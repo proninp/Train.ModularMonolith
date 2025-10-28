@@ -1,14 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-    <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-    </PropertyGroup>
-
     <ItemGroup>
-      <PackageReference Include="FastEndpoints" Version="7.1.0" />
-        <PackageReference Include="FastEndpoints.Swagger" Version="7.1.0" />
-      <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.8" />
+        <PackageReference Include="Ardalis.GuardClauses" Version="5.0.0" />
+        <PackageReference Include="FastEndpoints" Version="7.1.0"/>
+        <PackageReference Include="FastEndpoints.Swagger" Version="7.1.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.8"/>
     </ItemGroup>
 </Project>
