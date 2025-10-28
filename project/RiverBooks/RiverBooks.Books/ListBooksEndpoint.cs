@@ -11,9 +11,9 @@ internal class ListBooksEndpoint(IBookService bookService) :
         AllowAnonymous();
     }
 
-    public override async Task HandleAsync(CancellationToken cancellationToken = default)
+    public override async Task HandleAsync(CancellationToken cancellationToken)
     {
-        var books = bookService.ListBooks();
+        var books = await bookService.ListBooksAsync();
 
         await Send.OkAsync(new ListBooksResponse() { Books = books }, cancellationToken);
     }
