@@ -2,16 +2,16 @@
 
 internal class BookService : IBookService
 {
-    private readonly IBookBooksRepository _bookBooksRepository;
+    private readonly IBookRepository _bookRepository;
 
-    public BookService(IBookBooksRepository bookBooksRepository)
+    public BookService(IBookRepository bookRepository)
     {
-        _bookBooksRepository = bookBooksRepository;
+        _bookRepository = bookRepository;
     }
 
     public async Task<List<BookDto>> ListBooksAsync()
     {
-        var books = (await _bookBooksRepository.GetAllAsync())
+        var books = (await _bookRepository.GetAllAsync())
             .Select(b => new BookDto(b.Id, b.Title, b.Author, b.Price))
             .ToList();
         return books;
@@ -19,7 +19,7 @@ internal class BookService : IBookService
 
     public async Task<BookDto> GetBookByIdAsync(Guid id)
     {
-        var book = await _bookBooksRepository.GetByIdAsync(id);
+        var book = await _bookRepository.GetByIdAsync(id);
         
         // TODO: handle not found case
         
@@ -29,27 +29,27 @@ internal class BookService : IBookService
     public async Task CreateBookAsync(BookDto newBook)
     {
         var book = new Book(newBook.Id, newBook.Title, newBook.Author, newBook.Price);
-        await _bookBooksRepository.AddAsync(book);
-        await _bookBooksRepository.SaveChangesAsync();
+        await _bookRepository.AddAsync(book);
+        await _bookRepository.SaveChangesAsync();
     }
 
     public async Task DeleteBookAsync(Guid id)
     {
-        var bookToDelete = await _bookBooksRepository.GetByIdAsync(id);
+        var bookToDelete = await _bookRepository.GetByIdAsync(id);
         if (bookToDelete is not null)
         {
-            await _bookBooksRepository.DeleteAsync(bookToDelete);
-            await _bookBooksRepository.SaveChangesAsync();
+            await _bookRepository.DeleteAsync(bookToDelete);
+            await _bookRepository.SaveChangesAsync();
         }
     }
 
     public async Task UpdateBookPriceAsync(Guid bookId, decimal newPrice)
     {
         // validate the price
-        var book = await _bookBooksRepository.GetByIdAsync(bookId);
+        var book = await _bookRepository.GetByIdAsync(bookId);
         
         // TODO: handle not found case
         book!.UpdatePrice(newPrice);
-        await _bookBooksRepository.SaveChangesAsync();
+        await _bookRepository.SaveChangesAsync();
     }
 }

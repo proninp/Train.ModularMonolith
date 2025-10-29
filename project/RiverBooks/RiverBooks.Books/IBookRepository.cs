@@ -1,6 +1,6 @@
 ﻿namespace RiverBooks.Books;
 
-internal interface IBookBooksRepository : IReadOnlyBooksRepository
+internal interface IBookRepository : IReadOnlyBooksRepository
 {
     Task AddAsync(Book book);
 
