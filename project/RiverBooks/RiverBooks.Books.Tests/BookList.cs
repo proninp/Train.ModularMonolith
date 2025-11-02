@@ -14,6 +14,6 @@ public class BookList(Fixture fixture) : TestBase<Fixture>
         var testResult = await fixture.Client.GETAsync<List, ListBooksResponse>();
 
         testResult.Response.EnsureSuccessStatusCode();
-        testResult.Result.Books?.Count.ShouldBe(5);
+        testResult.Result.Books?.Count.ShouldBe(3);
     }
 }
